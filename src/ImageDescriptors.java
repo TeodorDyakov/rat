@@ -1,6 +1,5 @@
 
 import java.awt.Color;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 import util.ArrayUtils;
@@ -17,23 +16,6 @@ public class ImageDescriptors {
 	 * @param img 2d array of image.
 	 * @return LBPH (local binary pattern histogram) for the given 2d
 	 */
-	static int[] rot = new int[256];
-	static {
-		for (int i = 0; i < 256; i++) {
-			String s = Integer.toBinaryString(i);
-			for (; s.length() < 8;) {
-				s = "0" + s;
-			}
-			String min = new String(s);
-			for (int j = 0; j < 8; j++) {
-				s = s.charAt(7) + s.substring(0, 7);
-				if (min.compareTo(s) == 1) {
-					min = new String(s);
-				}
-			}
-			rot[i] = Integer.valueOf(min, 2);
-		}
-	}
 
 	public static int[] lbph(int[][] img) {
 
@@ -85,30 +67,6 @@ public class ImageDescriptors {
 			}
 		}
 		return (ArrayUtils.flatten(histogram));
-	}
-
-	/**
-	 * Downscale the image and make it greyscale then return it as 1-d feature
-	 * vector.
-	 * 
-	 * @param img1    - the given image
-	 * @param sz-size of scaled image
-	 * @return 1-d grey adn downscaled vector of img1
-	 */
-	static float[] scaleDownGrey(BufferedImage img1, int sz) {
-		int[] f = new int[sz * sz * 3];
-		BufferedImage img = ImageUtils.convertToBufferedImage(img1.getScaledInstance(sz, sz, Image.SCALE_SMOOTH));
-		for (int i = 0; i < sz; i++) {
-			for (int j = 0; j < sz; j++) {
-				Color c = new Color(img.getRGB(j, i));
-				// f[j * sz + i] = ImageUtils.colorToGreyscale(new
-				// Color(img.getRGB(j, i)));
-				f[j * sz * 3 + i] = c.getRed();
-				f[j * sz * 3 + i + 1] = c.getBlue();
-				f[j * sz * 3 + i + 2] = c.getGreen();
-			}
-		}
-		return MathUtils.normalize(f);
 	}
 
 	/**
