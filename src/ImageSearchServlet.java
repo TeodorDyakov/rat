@@ -23,8 +23,8 @@ public class ImageSearchServlet extends HttpServlet {
 		// get the file chosen by the user
 		Part filePart = request.getPart("fileToUpload");
 		int numberOfResults = Integer.parseInt(request.getParameter("numberOfResults"));
-		boolean useColor = !(request.getParameter("texture") == null);
-		boolean useTexture = !(request.getParameter("color") == null);
+		boolean useColor = !(request.getParameter("color") == null);
+		boolean useTexture = !(request.getParameter("texture") == null);
 
 		if (filePart.getSubmittedFileName().endsWith(".jpg") || filePart.getSubmittedFileName().endsWith(".png")) {
 

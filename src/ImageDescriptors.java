@@ -1,6 +1,7 @@
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
+import java.util.Arrays;
 
 import util.ArrayUtils;
 import util.ImageUtils;
@@ -79,20 +80,11 @@ public class ImageDescriptors {
 	 * @param useColor     - whether to use the color histogram of the image
 	 * @return the image descriptor for img
 	 */
-
-	/*
-	 * 
-	 */
-	static float[] computeImageDescriptor(BufferedImage img, int binsPerColor, boolean useLbp, boolean useColor) {
-		// return scaleDownGrey(img, 16);
-		float[] desc = new float[0];
-		if (useLbp) {
-			desc = MathUtils.normalize(lbp(img));
-		}
-		if (useColor) {
-			desc = ArrayUtils.concat(desc, MathUtils.normalize(colorHistogram(img, binsPerColor)));
-		}
-		return MathUtils.normalize(desc);
+	static float[] computeImageDescriptor(BufferedImage img, int binsPerColor) {
+		float[] lbph = MathUtils.normalize(lbp(img));
+		float[] color = MathUtils.normalize(colorHistogram(img, binsPerColor));
+		float[] desc = ArrayUtils.concat(lbph, color);
+		return desc;
 	}
 
 }

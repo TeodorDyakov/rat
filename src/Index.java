@@ -13,7 +13,6 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 import util.ArrayUtils;
-import util.MathUtils;
 
 public class Index implements Serializable {
 
@@ -24,15 +23,10 @@ public class Index implements Serializable {
 
 	List<IndexedImage> index;
 
-	boolean useLBP = false;
-	boolean useColor = false;
-
 	int binsPerColor = 8;
 
-	Index(int binsPerColor, boolean useLBP, boolean useColor) {
-		this.useColor = useColor;
+	Index(int binsPerColor) {
 		this.binsPerColor = binsPerColor;
-		this.useLBP = useLBP;
 		index = new ArrayList<>();
 	}
 
@@ -84,7 +78,7 @@ public class Index implements Serializable {
 			return null;
 		}
 
-		float[] imageDescriptor = ImageDescriptors.computeImageDescriptor(img, binsPerColor, useLBP, useColor);
+		float[] imageDescriptor = ImageDescriptors.computeImageDescriptor(img, binsPerColor);
 		IndexedImage indexedImage = new IndexedImage(imageFile, imageDescriptor);
 		return indexedImage;
 	}
@@ -115,51 +109,6 @@ public class Index implements Serializable {
 		}
 
 		System.out.println("index built in: " + (System.currentTimeMillis() - tic) / 1000f + "seconds");
-	}
-
-	/**
-	 * O(k*n) algorithm to return the k most similar images to the query image (
-	 * this is fast when (k << n) due to locality of reference)
-	 * 
-	 * @param queryImg query image
-	 * @param k        how many matches to return.
-	 * @return top k files which match the given image.
-	 */
-	List<File> getTopKMatches(BufferedImage queryImg, int k) {
-		long tic = System.currentTimeMillis();
-
-		float[] imageQueryDescriptor = ImageDescriptors.computeImageDescriptor(queryImg, binsPerColor, useLBP,
-				useColor);
-
-		List<File> results = new ArrayList<>();
-		/*
-		 * Precompute the similarity between the query and all the images in the index.
-		 */
-		float[] similarityCache = new float[index.size()];
-
-		for (int i = 0; i < index.size(); i++) {
-			similarityCache[i] = MathUtils.similarity(imageQueryDescriptor, index.get(i).imageDescriptor);
-		}
-
-		for (int i = 0; i < k; i++) {
-			// index of the minimum distance
-			int argmax = ArrayUtils.argmax(similarityCache);
-
-			File argmaxFile = index.get(argmax).file;
-			float maxSimilarity = similarityCache[argmax];
-			System.out.println(argmaxFile.getName() + " similarity: " + String.format("%.3f", maxSimilarity));
-			results.add(argmaxFile);
-
-			/*
-			 * set the similarity to argmax on negative infinity since the file at index
-			 * argmax has been added to the results.
-			 */
-			similarityCache[argmax] = Float.NEGATIVE_INFINITY;
-		}
-
-		System.out.println("Search done in: " + (System.currentTimeMillis() - tic) / 1000f + "s");
-
-		return results;
 	}
 
 }
