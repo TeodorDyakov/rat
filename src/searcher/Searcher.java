@@ -1,3 +1,4 @@
+package searcher;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -15,14 +16,14 @@ public class Searcher {
 		Index index = new Index(binsPerColor);
 
 		File serializedIndexFile = new File("seriallized_index.bin");
-
+		System.out.println(serializedIndexFile.getAbsolutePath());
 		if (loadIndexFromFile) {
 			index = Index.loadIndexFromFile(serializedIndexFile);
 		} else {
 			index.addToIndex(folderPath);
 			index.saveToFile(serializedIndexFile);
 		}
-
+		System.out.println(index.index.size());
 		long tic = System.currentTimeMillis();
 
 		float[] imageQueryDescriptor = ImageDescriptors.computeImageDescriptor(query, binsPerColor);

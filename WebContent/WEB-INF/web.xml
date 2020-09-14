@@ -6,7 +6,7 @@
 
 	<servlet>
 		<servlet-name>ImageSearchServlet</servlet-name>
-		<servlet-class>ImageSearchServlet</servlet-class>
+		<servlet-class>controller.ImageSearchServlet</servlet-class>
 		<multipart-config />
 	</servlet>
 

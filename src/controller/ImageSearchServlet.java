@@ -1,3 +1,4 @@
+package controller;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -14,6 +15,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+
+import searcher.Searcher;
 
 @SuppressWarnings("serial")
 public class ImageSearchServlet extends HttpServlet {
@@ -35,6 +38,7 @@ public class ImageSearchServlet extends HttpServlet {
 			InputStream fileInputStream = filePart.getInputStream();
 
 			File fileToSave = new File("WebContent/uploaded-files/" + filePart.getSubmittedFileName());
+			System.out.println(fileToSave.getAbsolutePath());
 			Files.copy(fileInputStream, fileToSave.toPath(), StandardCopyOption.REPLACE_EXISTING);
 
 			BufferedImage queryImg = ImageIO.read(fileToSave);
