@@ -1,8 +1,6 @@
 .format{
-
-
-    font-family:'Helvetica',sans-serif;
-    background-color:crimson;
+	font-family:'Helvetica',sans-serif;
+    background-color:gray;
     opacity:0.8;
     width:auto;
     text-align:center;
@@ -37,11 +35,11 @@
 label{
 
     display:inline;
-    text-decoration:underline;
 /*background-image:url('https://static1.bigstockphoto.com/5/0/1/large2/105912200.jpg');
 */
     font-size:20px;
-    color:#ffffee;
+    font-weight:bold;
+    font-color:black;
 }
 
 .format #howmany{

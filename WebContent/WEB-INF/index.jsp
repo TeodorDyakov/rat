@@ -13,14 +13,17 @@
         
         <p>Upload a .jpg or .png image:</p>
         
-        <input type="file" name="fileToUpload" id="browse"> <br> <br>
-
-        <input type="checkbox" id="texture" name="texture"
-        value="texture" checked > <label for="texture"> use texture</label><br>
-
-        <input type="checkbox" id="color"
-        name="color" value="color" checked> <label for="color"> use color</label><br>
-
+        <input type="file" name="fileToUpload" id="browse"> <br>
+        <p>Search by:</p>
+		<div style="text-align: center;">
+	    	<div style="display: inline-block; text-align: left;">
+		        <input type="checkbox" id="texture" name="texture"
+		        value="texture" checked > <label for="texture">texture</label><br>
+		
+		        <input type="checkbox" id="color"
+		        name="color" value="color" checked> <label for="color">color</label><br>
+			</div>
+		</div>
         <p>How many results do you want?</p>
         <input type="text" name="numberOfResults" value="10" maxlength="4" size="6" id="howmany"> <input type="submit"
         value="Search">
