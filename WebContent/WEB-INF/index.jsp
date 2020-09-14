@@ -31,8 +31,7 @@
 		<p>Results:</p>
 		<% 
 		List<String> messages = (List<String>) request.getAttribute("results"); 
-		for(int i = 0; i < messages.size(); i++){
-			String message = messages.get(i);
+		for(String message : messages){
 		%>
 			<img src= <%= message %>>
 		<%

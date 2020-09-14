@@ -15,4 +15,9 @@
 		<url-pattern>upload</url-pattern>
 	</servlet-mapping>
 
+	<servlet-mapping>
+		<servlet-name>ImageSearchServlet</servlet-name>
+		<url-pattern>rat</url-pattern>
+	</servlet-mapping>
+
 </web-app>
