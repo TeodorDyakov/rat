@@ -1,0 +1,70 @@
+.format{
+
+
+    font-family:'Helvetica',sans-serif;
+    background-color:crimson;
+    opacity:0.8;
+    width:auto;
+    text-align:center;
+    padding:10px 6px 9px 6px;
+}
+
+.format p{
+
+    font-weight:bold;
+    font-size:21px;
+    line-height:32px;
+}
+
+
+.format #browse{
+
+    width:150px;
+    height:20px;
+    background-color:#aabb00;
+    box-sizing:border-box;
+    border-radius:4px;
+    -webkit-border-radius:4px;
+}
+
+.format #browse p{
+
+    font-size:16px;
+    font-weight:bold;
+    color:#fff;
+}
+
+label{
+
+    display:inline;
+    text-decoration:underline;
+/*background-image:url('https://static1.bigstockphoto.com/5/0/1/large2/105912200.jpg');
+*/
+    font-size:20px;
+    color:#ffffee;
+}
+
+.format #howmany{
+
+    width:100px;
+    height:30px;
+    font-style:italic;
+    border:2px solid #000;
+    border-radius:4px;
+}
+
+.format input[type="submit"]{
+
+    padding:5px 7px 5px 7px;
+    width:95px;
+    height:35px;
+    background-color:#122;
+    color:#fff;
+    border:1px solid #fff;
+    margin-left:-7px;
+    box-sizing:border-box;
+    border-radius:4px;
+    text-transform:uppercase;
+    font-weight:bold;
+
+}
