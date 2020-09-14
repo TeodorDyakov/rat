@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -17,11 +18,14 @@ import javax.servlet.http.Part;
 @SuppressWarnings("serial")
 public class ImageSearchServlet extends HttpServlet {
 
+	List<String> resultPaths = new ArrayList<String>();
+
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-
+		resultPaths = new ArrayList<String>();
 		// get the file chosen by the user
 		Part filePart = request.getPart("fileToUpload");
+
 		int numberOfResults = Integer.parseInt(request.getParameter("numberOfResults"));
 		boolean useColor = !(request.getParameter("color") == null);
 		boolean useTexture = !(request.getParameter("texture") == null);
@@ -42,20 +46,23 @@ public class ImageSearchServlet extends HttpServlet {
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			}
-			response.getOutputStream()
-					.println("<p>Thanks " + "! Here are the top " + numberOfResults + " results:</p>");
 
 			for (File f : results) {
-				String resultImageName = "http://localhost:8080/images/" + f.getName();
-				response.getOutputStream().println("<img src=\"" + resultImageName + "\"/>");
+				String resultImageURL = "http://localhost:8080/images/" + f.getName();
+				resultPaths.add(resultImageURL);
 			}
-			response.getOutputStream()
-					.println("<p>Upload another image <a href=\"http://localhost:8080/index.html\">here</a>.</p>");
+
+			response.sendRedirect("upload");
 		} else {
-			// the file was not a JPG or PNG
 			response.getOutputStream().println("<p>Please only upload JPG or PNG files.</p>");
 			response.getOutputStream()
 					.println("<p>Upload another file <a href=\"http://localhost:8080/index.html\">here</a>.</p>");
 		}
+	}
+
+	@Override
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("results", resultPaths);
+		request.getRequestDispatcher("/index.jsp").forward(request, response);
 	}
 }

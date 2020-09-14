@@ -1,7 +1,6 @@
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
-import java.util.Arrays;
 
 import util.ArrayUtils;
 import util.ImageUtils;

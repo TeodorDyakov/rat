@@ -12,8 +12,6 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-import util.ArrayUtils;
-
 public class Index implements Serializable {
 
 	/**

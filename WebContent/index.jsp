@@ -1,3 +1,5 @@
+<%@ page import="java.util.List" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,5 +17,22 @@
 		<input type="text" name="numberOfResults" value="10" maxlength="4" size="4"> <input type="submit"
 			value="Search">
 	</form>
+	<% 
+	if(request.getAttribute("results") != null){
+	%>
+		<p>Results:</p>
+		<% 
+		List<String> messages = (List<String>) request.getAttribute("results"); 
+		for(int i = 0; i < messages.size(); i++){
+			String message = messages.get(i);
+		%>
+			<img src= <%= message %>>
+		<%
+		}
+		%>
+		<hr/>
+	<%
+	}
+	%>
 </body>
 </html>
