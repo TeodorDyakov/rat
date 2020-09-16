@@ -43,7 +43,6 @@ public class ImageSearchServlet extends HttpServlet {
 
 			BufferedImage queryImg = ImageIO.read(fileToSave);
 			List<File> results = null;
-
 			try {
 				results = Searcher.getSearchResults(numberOfResults, "WebContent/images", queryImg, true, useTexture,
 						useColor);
@@ -60,13 +59,14 @@ public class ImageSearchServlet extends HttpServlet {
 		} else {
 			response.getOutputStream().println("<p>Please only upload JPG or PNG files.</p>");
 			response.getOutputStream()
-					.println("<p>Upload another file <a href=\"http://localhost:8080/index.html\">here</a>.</p>");
+					.println("<p>Upload another file <a href=\"http://localhost:8080/rat\">here</a>.</p>");
 		}
 	}
 
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("results", resultPaths);
+		System.out.println(getServletContext().getContextPath());
 		request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
 	}
 }
