@@ -16,13 +16,13 @@ public class IndexedImage implements Serializable {
 	}
 
 	public static float similarity(float[] img1, float[] img2, boolean useTexture, boolean useColor) {
-		if (useTexture == false) {
+		if (!useTexture) {
 			for (int i = 0; i < 256; i++) {
 				img1[i] = 0;
 				img2[i] = 0;
 			}
 		}
-		if (useColor == false) {
+		if (!useColor) {
 			for (int i = 256; i < img1.length; i++) {
 				img1[i] = 0;
 				img2[i] = 0;
@@ -32,3 +32,4 @@ public class IndexedImage implements Serializable {
 	}
 
 }
+	

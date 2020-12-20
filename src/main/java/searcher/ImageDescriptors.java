@@ -76,8 +76,6 @@ public class ImageDescriptors {
 	 * 
 	 * @param img
 	 * @param binsPerColor - bins per color for the color histogram
-	 * @param useLbp       - whether to use lbp (local binary pattern) information
-	 * @param useColor     - whether to use the color histogram of the image
 	 * @return the image descriptor for img
 	 */
 	static float[] computeImageDescriptor(BufferedImage img, int binsPerColor) {
